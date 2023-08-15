@@ -1,0 +1,27 @@
+{
+    "name": "js-segment-tracker",
+    "version": "1.0.0",
+    "description": "A script designed for automatically tracking events on websites and sending them to Segment.",
+    "main": "tracker.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/portofinolabs/js-segment-tracker.git"
+    },
+    "keywords": [
+        "segment",
+        "event",
+        "tracker",
+        "analytics"
+    ],
+    "author": "portofinolabs",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/portofinolabs/js-segment-tracker/issues"
+    },
+    "homepage": "https://github.com/portofinolabs/js-segment-tracker#readme",
+    "dependencies": {},
+    "devDependencies": {}
+}
