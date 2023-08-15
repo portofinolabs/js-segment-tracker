@@ -1,4 +1,4 @@
-Segment Event Tracker
+JS Segment Tracker
 =====================
 
 Description
