@@ -11,11 +11,10 @@ Installation
 
 1. Include the Segment script on your page.
 
+2. Add this tracking script to your webpage.
 ```javascript
 <script defer src="https://cdn.jsdelivr.net/gh/portofinolabs/js-segment-tracker@v1.0.1/index.js"></script>
 ```
-   
-2. Add this tracking script to your webpage.
 
 Usage
 -----
