@@ -80,7 +80,7 @@ Installation
 2. Add this tracking script to your webpage.
 
 ```javascript
-<script defer src="https://cdn.jsdelivr.net/gh/portofinolabs/js-segment-tracker@v1.0.1/index.js"></script>
+<script defer src="https://cdn.jsdelivr.net/gh/portofinolabs/js-segment-tracker@v1.0.2/index.js"></script>
 ```
 
 Usage
