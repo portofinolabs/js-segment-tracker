@@ -93,7 +93,7 @@
     const eventData = gatherEventData(referrer)
     const analytics = global.analytics || window.analytics
     if (analytics && typeof analytics.track === "function") {
-      analytics.track("Page Viewed New", eventData)
+      analytics.track("Page Viewed", eventData)
     } else {
       console.warn("Segment analytics is not available for Page Viewed event.")
     }
