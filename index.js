@@ -48,15 +48,26 @@
     }
   }
 
+  const DATA_EVENT_PREFIX = 'data-event-'
+  const CURRENT_URL_PARAM_KEY = 'url'
+  function getSpecialAttributesFromEvent(key, value) {
+    switch (key) {
+      case CURRENT_URL_PARAM_KEY:
+        return !value ? previousURL : value
+      default:
+        return value
+    }
+  }
+
   function getDataAttributesFromEventTarget(target) {
     let currentTarget = target
     const data = {}
 
     while (currentTarget) {
       for (let attr of currentTarget.attributes) {
-        if (attr.name.startsWith("data-event-")) {
-          const key = attr.name.slice("data-event-".length)
-          data[key] = attr.value
+        if (attr.name.startsWith(DATA_EVENT_PREFIX)) {
+          const key = attr.name.slice(DATA_EVENT_PREFIX.length)
+          data[key] = getSpecialAttributesFromEvent(key, attr.value)
         }
       }
 
