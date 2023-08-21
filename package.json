@@ -1,6 +1,6 @@
 {
     "name": "js-segment-tracker",
-    "version": "1.0.5",
+    "version": "1.0.6",
     "description": "A script designed for automatically tracking events on websites and sending them to Segment.",
     "main": "tracker.js",
     "scripts": {
