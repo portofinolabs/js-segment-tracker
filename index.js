@@ -7,6 +7,7 @@
   const CURRENT_URL_PARAM_KEY = 'url';
 
   const scriptTag = document.getElementById('js-segment-tracker-script');
+  const scriptTag = document.currentScript;
 
   let previousURL = window.location.href;
   function getTrackingDataFromEventTarget(target) {
@@ -44,9 +45,7 @@
     const eventData = gatherEventData(referrer);
     const analytics = global.analytics || window.analytics;
     if (analytics && typeof analytics.track === 'function') {
-      const pageViewedEventName = scriptTag.getAttribute('data-page-viewed-event-name')
-    || 'Page Viewed';
-
+      const pageViewedEventName = scriptTag.getAttribute('data-page-viewed-event-name') || 'Page Viewed';
       analytics.track(pageViewedEventName, eventData);
     } else {
       console.warn('Segment analytics is not available for Page Viewed event.');
@@ -113,6 +112,11 @@
     document.body.addEventListener('click', handleElementClick);
     window.addEventListener('popstate', () => trackPageViewed(previousURL));
     window.addEventListener('hashchange', () => trackPageViewed(previousURL));
+    setTimeout(() => {
+      trackPageViewed(previousURL);
+      // Update the previousURL after tracking the event.
+      previousURL = window.location.href;
+    }, 0);
   }
 
   // Intercept changes to the history to track page views
