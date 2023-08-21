@@ -6,7 +6,6 @@
   const DATA_EVENT_PREFIX = 'data-event-';
   const CURRENT_URL_PARAM_KEY = 'url';
 
-  const scriptTag = document.getElementById('js-segment-tracker-script');
   const scriptTag = document.currentScript;
 
   let previousURL = window.location.href;
