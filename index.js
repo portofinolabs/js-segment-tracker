@@ -112,7 +112,7 @@
     window.addEventListener('popstate', () => trackPageViewed(previousURL));
     window.addEventListener('hashchange', () => trackPageViewed(previousURL));
     setTimeout(() => {
-      trackPageViewed(previousURL);
+      trackPageViewed();
       // Update the previousURL after tracking the event.
       previousURL = window.location.href;
     }, 0);

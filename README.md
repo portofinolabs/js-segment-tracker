@@ -80,7 +80,7 @@ Installation
 2. Add this tracking script to your webpage.
 
 ```javascript
-<script defer data-page-viewed-event-name="Page Viewed" src="https://cdn.jsdelivr.net/gh/portofinolabs/js-segment-tracker@v1.0.6/index.js"></script>
+<script defer data-page-viewed-event-name="Page Viewed" src="https://cdn.jsdelivr.net/gh/portofinolabs/js-segment-tracker@v1.0.7/index.js"></script>
 ```
 
 Usage
