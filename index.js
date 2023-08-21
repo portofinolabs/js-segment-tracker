@@ -6,6 +6,8 @@
   const DATA_EVENT_PREFIX = 'data-event-';
   const CURRENT_URL_PARAM_KEY = 'url';
 
+  const scriptTag = document.getElementById('js-segment-tracker-script');
+
   let previousURL = window.location.href;
   function getTrackingDataFromEventTarget(target) {
     let currentTarget = target;
@@ -42,12 +44,10 @@
     const eventData = gatherEventData(referrer);
     const analytics = global.analytics || window.analytics;
     if (analytics && typeof analytics.track === 'function') {
-      analytics.track(
-        process.env.PAGE_VIEWED_EVENT_NAME
-          || process.env.VITE_PAGE_VIEWED_EVENT_NAME
-          || 'Page Viewed',
-        eventData,
-      );
+      const pageViewedEventName = scriptTag.getAttribute('data-page-viewed-event-name')
+    || 'Page Viewed';
+
+      analytics.track(pageViewedEventName, eventData);
     } else {
       console.warn('Segment analytics is not available for Page Viewed event.');
     }
