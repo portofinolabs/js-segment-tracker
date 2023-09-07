@@ -6,8 +6,6 @@
   const DATA_EVENT_PREFIX = 'data-event-';
   const CURRENT_URL_PARAM_KEY = 'url';
 
-  const scriptTag = document.currentScript;
-
   let previousURL = window.location.href;
   function getTrackingDataFromEventTarget(target) {
     let currentTarget = target;
@@ -19,36 +17,6 @@
       currentTarget = currentTarget.parentElement;
     }
     return null;
-  }
-
-  /**
-   * Gathers page related data like path, referrer, search query, title, and full URL.
-   * @param {string} [referrer=document.referrer] - Referrer of the page.
-   * @returns {Object} - An object containing the page data.
-   */
-  function gatherEventData(referrer = document.referrer) {
-    return {
-      path: window.location.pathname,
-      referrer,
-      search: window.location.search,
-      title: document.title,
-      url: window.location.href,
-    };
-  }
-
-  /**
-   * Sends a 'Page Viewed New' event to Segment with relevant page data.
-   * @param {string} [referrer=document.referrer] - Referrer of the page.
-   */
-  function trackPageViewed(referrer = document.referrer) {
-    const eventData = gatherEventData(referrer);
-    const analytics = global.analytics || window.analytics;
-    if (analytics && typeof analytics.track === 'function') {
-      const pageViewedEventName = scriptTag.getAttribute('data-page-viewed-event-name') || 'Page Viewed';
-      analytics.track(pageViewedEventName, eventData);
-    } else {
-      console.warn('Segment analytics is not available for Page Viewed event.');
-    }
   }
 
   function getSpecialAttributesFromEvent(key, value) {
@@ -105,44 +73,11 @@
   }
 
   /**
-   * Initializes Segment tracking for click events and navigation changes.
+   * Initializes Segment tracking for click events.
    */
   function initSegmentTracking() {
     document.body.addEventListener('click', handleElementClick);
-    window.addEventListener('popstate', () => trackPageViewed(previousURL));
-    window.addEventListener('hashchange', () => trackPageViewed(previousURL));
-    setTimeout(() => {
-      trackPageViewed();
-      // Update the previousURL after tracking the event.
-      previousURL = window.location.href;
-    }, 0);
   }
-
-  // Intercept changes to the history to track page views
-  /**
-   * Intercept history.pushState to track page views after a navigation change.
-   */
-  const originalPushState = history.pushState;
-  history.pushState = function () {
-    originalPushState.apply(this, arguments);
-    setTimeout(() => {
-      trackPageViewed(previousURL);
-      // Update the previousURL after tracking the event.
-      previousURL = window.location.href;
-    }, 0);
-  };
-
-  /**
-   * Intercept history.replaceState to track page views after a navigation change.
-   */
-  const originalReplaceState = history.replaceState;
-  history.replaceState = function () {
-    originalReplaceState.apply(this, arguments);
-    setTimeout(() => {
-      trackPageViewed(previousURL);
-      previousURL = window.location.href;
-    }, 0);
-  };
 
   initSegmentTracking();
 }(typeof window !== 'undefined' ? window : this));
